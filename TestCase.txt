@@ -1,0 +1,9 @@
+11. Write tests for the delete button you added in task 7.
+
+
+1. Click on "Album" from the top menu
+2. Click on delete button of a album
+3. A popup message will come.
+4. Click on Ok.
+5. The corresponding album gets deleted
+6. The tr also gets deleted from the UI
