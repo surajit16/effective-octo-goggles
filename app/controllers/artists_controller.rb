@@ -33,7 +33,8 @@ class ArtistsController < ApplicationController
 
   def destroy
     @artist.destroy
-    respond_with(@artist)
+    redirect_to artists_path
+    #    respond_with(@artist)
   end
 
   private

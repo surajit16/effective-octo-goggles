@@ -33,7 +33,8 @@ class PublishersController < ApplicationController
 
   def destroy
     @publisher.destroy
-    respond_with(@publisher)
+    redirect_to publishers_path
+    #    respond_with(@publisher)
   end
 
   private

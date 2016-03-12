@@ -1,6 +1,6 @@
 class Album < ActiveRecord::Base
   belongs_to :publisher
-  has_many :songs
+  has_many :songs, dependent: :destroy
   
   validates :name, presence: true, length: { in: 2..50 }
   validates :publisher_id, presence: true

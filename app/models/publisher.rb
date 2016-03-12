@@ -1,6 +1,6 @@
 class Publisher < ActiveRecord::Base
-  has_many :albums
-  has_many :songs, through: :albums
+  has_many :albums, dependent: :destroy
+  has_many :songs, through: :albums, dependent: :destroy
   
   validates :name, length: { in: 5..50 }, uniqueness: true
   validates :address, length: { in: 5..50 }

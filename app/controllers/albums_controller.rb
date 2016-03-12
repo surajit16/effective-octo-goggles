@@ -36,7 +36,8 @@ class AlbumsController < ApplicationController
     if request.xhr?
       render :text=>"success"
     else
-      respond_with(@album)
+    redirect_to albums_path
+    #      respond_with(@album)
     end
   end
 
