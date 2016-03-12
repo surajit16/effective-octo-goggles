@@ -4,4 +4,7 @@ class Song < ActiveRecord::Base
   
   validates :name, presence: true, length: { in: 5..50 }
   validates :album_id, :artist_id, presence: true
+  scope :latest, -> { order("created_at desc") }
+
+
 end
