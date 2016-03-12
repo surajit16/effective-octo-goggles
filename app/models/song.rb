@@ -6,6 +6,14 @@ class Song < ActiveRecord::Base
   validates :album_id, :artist_id, presence: true
   scope :latest, -> { order("created_at desc") }
   scope :recent, Proc.new {|arg=0|  arg==0 ? (order("created_at desc").where("created_at > #{(Date.today-6.month)}")) : (order("created_at desc").where("created_at > #{(Date.today-6.month)}").limit(arg)) }
-
+  
+  after_save :delete_cache
+  after_destroy :delete_cache
+  
+  
+  
+  def delete_cache
+    Rails.cache.clear('latest_5')
+  end
 
 end

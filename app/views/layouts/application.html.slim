@@ -49,7 +49,10 @@ html lang="en"
           .col-md-2
             ul
               li LATEST
-              li ~
+              - cache('latest_5') do
+                - Song.recent(5).each do |song|
+                  li =link_to song.name, song
+
           .col-md-2
             ul
               li OUR TEAM
