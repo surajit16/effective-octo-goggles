@@ -33,7 +33,11 @@ class AlbumsController < ApplicationController
 
   def destroy
     @album.destroy
-    respond_with(@album)
+    if request.xhr?
+      render :text=>"success"
+    else
+      respond_with(@album)
+    end
   end
 
   private

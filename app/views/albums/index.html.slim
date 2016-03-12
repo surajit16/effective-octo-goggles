@@ -10,9 +10,16 @@ table.table.table-striped
       th name
       th publisher
       th released
+      th Option
   tbody
     - @albums.each do |album|
       tr
         td= link_to album.name, album
         td= album.publisher.name
         td= album.released_on
+        td= link_to 'Delete', album, method: "delete", data: { confirm: 'Are you sure?' }, remote: true, class: "button-delete"
+
+javascript:
+  $('.button-delete').bind('ajax:complete', function(){
+    $(this).parent().parent().remove();
+  });
