@@ -4,7 +4,7 @@ class SongsController < ApplicationController
   respond_to :html
 
   def index
-    @songs = Song.includes([:album, :artist]).latest
+    @songs = Song.includes([:album, :artist]).recent
     respond_with(@songs)
   end
 
