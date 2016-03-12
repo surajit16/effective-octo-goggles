@@ -4,7 +4,7 @@ class AlbumsController < ApplicationController
   respond_to :html
 
   def index
-    @albums = Album.all
+    @albums = Album.includes(:publisher).all
     respond_with(@albums)
   end
 
@@ -37,11 +37,16 @@ class AlbumsController < ApplicationController
   end
 
   private
-    def set_album
+  def set_album
+    #    @album = Album.joins([:publisher]).joins("left outer join songs on albums.id=songs.album_id").find(params[:id])
+    if action_name=="show"
+      @album = Album.includes(:publisher, :songs).find(params[:id])
+    else
       @album = Album.find(params[:id])
     end
+  end
 
-    def album_params
-      params.require(:album).permit(:name, :cover_art, :publisher_id, :released_on)
-    end
+  def album_params
+    params.require(:album).permit(:name, :cover_art, :publisher_id, :released_on)
+  end
 end

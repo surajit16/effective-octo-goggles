@@ -4,7 +4,7 @@ class SongsController < ApplicationController
   respond_to :html
 
   def index
-    @songs = Song.latest
+    @songs = Song.includes([:album, :artist]).latest
     respond_with(@songs)
   end
 
@@ -37,11 +37,15 @@ class SongsController < ApplicationController
   end
 
   private
-    def set_song
+  def set_song
+    if action_name=="show"
+      @song = Song.includes([:album, :artist]).find(params[:id])
+    else
       @song = Song.find(params[:id])
     end
+  end
 
-    def song_params
-      params.require(:song).permit(:name, :album_id, :artist_id)
-    end
+  def song_params
+    params.require(:song).permit(:name, :album_id, :artist_id)
+  end
 end

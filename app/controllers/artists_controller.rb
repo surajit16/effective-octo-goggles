@@ -37,11 +37,15 @@ class ArtistsController < ApplicationController
   end
 
   private
-    def set_artist
+  def set_artist
+    if action_name=="show"
+      @artist = Artist.includes(:albums).find(params[:id])
+    else
       @artist = Artist.find(params[:id])
     end
+  end
 
-    def artist_params
-      params.require(:artist).permit(:name)
-    end
+  def artist_params
+    params.require(:artist).permit(:name)
+  end
 end

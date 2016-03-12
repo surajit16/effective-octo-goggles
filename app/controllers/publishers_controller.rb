@@ -37,11 +37,15 @@ class PublishersController < ApplicationController
   end
 
   private
-    def set_publisher
+  def set_publisher
+    if action_name=="show"
+      @publisher = Publisher.includes(:albums).find(params[:id])
+    else
       @publisher = Publisher.find(params[:id])
     end
+  end
 
-    def publisher_params
-      params.require(:publisher).permit(:name, :address, :city, :state, :zip, :phone, :url)
-    end
+  def publisher_params
+    params.require(:publisher).permit(:name, :address, :city, :state, :zip, :phone, :url)
+  end
 end
